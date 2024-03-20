@@ -18,7 +18,7 @@ export class UpdateProductController {
       });
 
       if (!product) {
-        throw new Error("Não foi possível encontrar o produto");
+        return res.status(500).send("Não foi possível encontrar o produto");
       }
 
       const updateProduct = await prismaClient.produto.update({
@@ -32,7 +32,7 @@ export class UpdateProductController {
 
       return res.json({ updateProduct });
     } catch (error) {
-      res.status(500).json({ error: "Não foi possível atualizar o produto" });
+      return res.status(500).send("Não foi possível atualizar o produto");
     }
   }
 }

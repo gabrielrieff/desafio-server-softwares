@@ -7,7 +7,7 @@ import { ListProductController } from "../controllers/list-products";
 const router = Router();
 
 router.get("/", new ListProductController().handle);
-router.get("/product", new CreateProductController().handle);
+router.post("/product", new CreateProductController().handle);
 router.delete("/product/:id", new DeleteProductController().handle);
 router.patch("/product/:id", new UpdateProductController().handle);
 

@@ -8,12 +8,23 @@ export class CreateProductController {
 
       const alreadyExistProduct = await prismaClient.produto.findFirst({
         where: {
-          descricao: descricao,
+          OR: [
+            {
+              descricao: descricao,
+            },
+            {
+              codigo: codigo,
+            },
+          ],
         },
       });
 
       if (alreadyExistProduct) {
-        res.status(500).json({ error: "O produto já existe" });
+        return res
+          .status(500)
+          .send(
+            `O produto já cadastrado, seu código é ${alreadyExistProduct.codigo}`
+          );
       }
 
       const product = await prismaClient.produto.create({
@@ -26,7 +37,7 @@ export class CreateProductController {
 
       res.json(product);
     } catch (error) {
-      res.status(500).json({ error: "Não foi possível criar um novo produto" });
+      return res.status(500).send("Não foi possível criar um novo produto");
     }
   }
 }

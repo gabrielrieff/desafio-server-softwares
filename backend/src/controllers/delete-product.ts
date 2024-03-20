@@ -11,7 +11,7 @@ export class DeleteProductController {
       });
 
       if (!product) {
-        throw new Error("Não foi possível encontrar o produto");
+        return res.status(500).send("Não foi possível encontrar o produto");
       }
 
       await prismaClient.produto.delete({
@@ -20,7 +20,7 @@ export class DeleteProductController {
 
       return res.json({ product });
     } catch (error) {
-      res.status(500).json({ error: "Não foi possível excluir o produto" });
+      return res.status(500).send("Não foi possível excluir o produto");
     }
   }
 }

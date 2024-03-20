@@ -8,9 +8,9 @@ export class ListProductController {
 
       return res.json(products);
     } catch (error) {
-      res.status(500).json({
-        error: "Aconteceu algum problema ao tentar listar os produtos",
-      });
+      return res
+        .status(500)
+        .send("Aconteceu algum problema ao tentar listar os produtos");
     }
   }
 }
