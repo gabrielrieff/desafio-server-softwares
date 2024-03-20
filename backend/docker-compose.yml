@@ -1,0 +1,18 @@
+version: "3.5"
+
+services:
+  postgres:
+    image: postgres:alpine
+    container_name: db-postgres-desafio
+    restart: always
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: admin
+      POSTGRESS_DB: desafio
+    ports:
+      - "5435:5432"
+
+volumes:
+  data:
